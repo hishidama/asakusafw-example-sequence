@@ -1,0 +1,3 @@
+asakusafw-example-sequence
+
+Asakusa FrameworkでOracleシーケンスを呼ぶサンプル
