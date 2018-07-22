@@ -1,0 +1,7 @@
+@directio.csv
+seq_example = {
+
+    seq_number : LONG;
+
+    data : TEXT;
+};

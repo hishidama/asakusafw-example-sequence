@@ -1,0 +1,32 @@
+group 'com.example'
+
+buildscript {
+    repositories {
+        maven { url 'http://asakusafw.s3.amazonaws.com/maven/releases' }
+        maven { url 'http://asakusafw.s3.amazonaws.com/maven/snapshots' }
+    }
+    dependencies {
+        classpath group: 'com.asakusafw.gradle', name: 'asakusa-distribution', version: '0.10.1'
+    }
+}
+
+apply plugin: 'asakusafw-sdk'
+apply plugin: 'asakusafw-organizer'
+//apply plugin: 'asakusafw-mapreduce'
+//apply plugin: 'asakusafw-spark'
+apply plugin: 'asakusafw-m3bp'
+apply plugin: 'asakusafw-vanilla'
+apply plugin: 'eclipse'
+
+asakusafwOrganizer {
+    profiles.dev {
+        assembly.into('.') {
+            hadoop.embed true
+            put 'src/dist/dev'
+        }
+    }
+}
+
+dependencies {
+    compile group: 'com.asakusafw.bridge', name: 'asakusa-bridge-runtime', version: asakusafw.vanilla.version
+}

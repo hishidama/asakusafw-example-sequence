@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+<!--
+Default Implementations (for Development)
+-->
+	<property>
+		<name>com.asakusafw.runtime.core.Report.Delegate</name>
+		<value>com.asakusafw.runtime.report.CommonsLoggingReport</value>
+	</property>
+	
+	<property>
+		<name>com.asakusafw.directio.root</name>
+		<value>com.asakusafw.runtime.directio.hadoop.HadoopDataSource</value>
+	</property>
+	<property>
+		<name>com.asakusafw.directio.root.path</name>
+		<value>/</value>
+	</property>
+	<property>
+		<name>com.asakusafw.directio.root.fs.path</name>
+		<value>target/testing/directio</value>
+	</property>
+
+	<property>
+		<name>sequence.seqTest.class</name>
+		<value>com.example.api.sequence.LocalSequenceDelegate</value>
+	</property>
+
+<!--
+	<property>
+		<name>sequence.seqTest.class</name>
+		<value>com.example.api.sequence.OracleSequenceDelegate</value>
+	</property>
+	<property>
+		<name>sequence.seqTest.url</name>
+		<value>jdbc:oracle:thin:@DB-SERVER:1521:ORCL</value>
+	</property>
+	<property>
+		<name>sequence.seqTest.user</name>
+		<value>asakusa</value>
+	</property>
+	<property>
+		<name>sequence.seqTest.password</name>
+		<value>asakusa</value>
+	</property>
+	<property>
+		<name>sequence.seqTest.sequenceName</name>
+		<value>SEQTEST1</value>
+	</property>
+-->
+
+</configuration>

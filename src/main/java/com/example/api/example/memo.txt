@@ -1,0 +1,33 @@
+実行環境の ASAKUSA_HOME/core/conf/asakusa-resources.xml に以下の設定を追加しておく必要がある
+※seqTestはSequenceExampleOperator内で指定している名前
+
+テスト実行用
+	<property>
+		<name>sequence.seqTest.class</name>
+		<value>com.example.api.sequence.LocalSequenceDelegate</value>
+	</property>
+
+
+本番環境用
+	<property>
+		<name>sequence.seqTest.class</name>
+		<value>com.example.api.sequence.OracleSequenceDelegate</value>
+	</property>
+	<property>
+		<name>sequence.seqTest.url</name>
+		<value>jdbc:oracle:thin:@DB-SERVER:1521:ORCL</value>
+	</property>
+	<property>
+		<name>sequence.seqTest.user</name>
+		<value>asakusa</value>
+	</property>
+	<property>
+		<name>sequence.seqTest.password</name>
+		<value>asakusa</value>
+	</property>
+	<property>
+		<name>sequence.seqTest.sequenceName</name>
+		<value>SEQTEST1</value>
+	</property>
+
+src/main/libs/にojdbc.jarを置く （置いたら、gradlew eclipseが必要）

@@ -1,0 +1,3 @@
+
+ojdbcX.jarを src/main/libs/ に配置する。
+
