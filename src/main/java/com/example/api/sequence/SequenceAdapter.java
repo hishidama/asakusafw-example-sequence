@@ -6,7 +6,6 @@ import java.lang.reflect.Constructor;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 import com.asakusafw.bridge.broker.ResourceBroker;
@@ -23,13 +22,18 @@ public final class SequenceAdapter implements Closeable {
 
 	private static final ResourceCacheStorage<SequenceAdapter> CACHE = new ResourceCacheStorage<>();
 
-	private static final Callable<SequenceAdapter> SUPPLIER = () -> {
+	private static final Supplier<SequenceAdapter> SUPPLIER = () -> {
 		ResourceConfiguration conf = ResourceBroker.find(ResourceConfiguration.class);
 		if (conf == null) {
 			throw new AssertionError("not found ResourceConfiguration");
 		}
 
-		return new SequenceAdapter(conf);
+		SequenceAdapter adapter = new SequenceAdapter(conf);
+
+		// ResourceBrokerに登録しておくと、バッチ終了時にcloseメソッドが呼ばれる
+		ResourceBroker.schedule(adapter);
+
+		return adapter;
 	};
 
 	// スレッド毎に異なるインスタンスを返すので、戻り値をフィールドに保持しないこと
@@ -37,8 +41,7 @@ public final class SequenceAdapter implements Closeable {
 		assert name != null;
 
 		// SequenceAdapterはスレッドごとに1インスタンス（CACHEの機能）
-		// ResourceBrokerを経由しておくと、バッチ終了時にcloseメソッドが呼ばれる
-		SequenceAdapter adapter = CACHE.get(() -> ResourceBroker.get(SequenceAdapter.class, SUPPLIER));
+		SequenceAdapter adapter = CACHE.get(SUPPLIER);
 
 		return adapter.getDelegate(name);
 	}

@@ -2,7 +2,7 @@ asakusafw-example-sequence
 
 # 概要
 
-Asakusa Framework 0.10.1でOracleシーケンスを呼ぶサンプル
+Asakusa Framework 0.10.2でOracleシーケンスを呼ぶサンプル
 
 
 # 使用方法

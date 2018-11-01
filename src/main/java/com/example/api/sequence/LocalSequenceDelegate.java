@@ -13,7 +13,9 @@ public class LocalSequenceDelegate extends SequenceDelegate {
 
 	@Override
 	protected void doInitialize(SequenceAdapter adapter) throws IOException {
-		this.counter = COUNTER_MAP.computeIfAbsent(getName(), key -> new AtomicLong());
+		synchronized (COUNTER_MAP) {
+			this.counter = COUNTER_MAP.computeIfAbsent(getName(), key -> new AtomicLong());
+		}
 	}
 
 	@Override
